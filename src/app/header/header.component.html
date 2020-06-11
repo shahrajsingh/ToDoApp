@@ -1,0 +1,12 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<mat-toolbar class="Header sticky-top">
+  <p>To Do<p>
+
+  <form class="Search" (submit)="onSearch(searchForm)" #searchForm="ngForm"  matTooltip="Search"
+  matTooltipPosition="below">
+    <button type="submit" class="material-icons btn">search</button>
+    <input type="text" name="search" ngModel #search="ngModel" required>
+  </form>
+  <button mat-raised-button *ngIf="isAuth">Logout</button>
+
+</mat-toolbar>

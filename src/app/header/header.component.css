@@ -1,0 +1,148 @@
+.Header {
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+  padding-left: 3%;
+  height: 3rem;
+  padding-right: 3%;
+  background-color: rgb(0,120,215);
+}
+.Header p {
+  font-family: 'Segoe UI Semibold';
+  margin: 0px;
+}
+
+form.Search:hover {
+  background: rgb(255, 255, 255);
+}
+
+form.Search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.Search {
+  margin: auto;
+  max-width: 500px;
+  width: 400px;
+  border-radius: 4px;
+  background-color: rgb(195,221,247);
+}
+.Search button {
+  width: 8%;
+  padding: 0px;
+}
+
+
+.material-icons {
+  transform: scaleX(-1);
+}
+.Search input {
+  width: 92%;
+  margin: 0px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgba(195,221,247, 0);
+  color: black;
+}
+.Search input:hover {
+  background-color: white;
+
+}
+.Search input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 552px){
+  .Search {
+    max-width: 250px;
+    border-radius: 4px;
+    background-color: rgb(195,221,247);
+
+  }
+  .Search button {
+    width: 14%;
+    padding: 0px;
+  }
+  .material-icons {
+    transform: scaleX(-1);
+  }
+  .Search input {
+    width: 86%;
+    margin: 0px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(7, 202, 140, 0);
+  }
+}
+@media screen and (max-width: 480px) {
+  .Search {
+    max-width: 180px;
+    border-radius: 4px;
+    background-color: rgb(195,221,247);
+
+  }
+  .Search button {
+    width: 14%;
+    padding: 0px;
+  }
+  .material-icons {
+    transform: scaleX(-1);
+  }
+  .Search input {
+    width: 86%;
+    margin: 0px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(7, 202, 140, 0);
+  }
+}
+@media screen and (max-width: 360px) {
+  .Search {
+    max-width: 180px;
+    border-radius: 4px;
+    background-color: rgb(195,221,247);
+
+  }
+  .Search button {
+    width: 14%;
+    padding: 0px;
+  }
+  .material-icons {
+    transform: scaleX(-1);
+  }
+  .Search input {
+    width: 82%;
+    margin: 0px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(7, 202, 140, 0);
+  }
+  .Header {
+    padding-right: 0px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .Search {
+    max-width: 150px;
+    border-radius: 4px;
+    background-color: rgb(195,221,247);
+
+  }
+  .Search button {
+    width: 18%;
+    padding: 0px;
+  }
+  .material-icons {
+    transform: scaleX(-1);
+  }
+  .Search input {
+    width: 86%;
+    margin: 0px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(7, 202, 140, 0);
+  }
+  .Header {
+    padding-right: 0px;
+  }
+}

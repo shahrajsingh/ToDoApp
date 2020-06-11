@@ -1,0 +1,57 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="row" style="width: 100%; height: 100%; position: fixed;">
+  <div class="col1">
+    <div class="menubtn btn">
+      <mat-icon class="material-icons" (click)="togglefunc()">menu</mat-icon>
+    </div>
+    <div class="nav" id="sidenav">
+      <div class="btndiv"><a class="btn" (click)="navigate('myDay')">
+          <mat-icon class="material-icons">wb_sunny</mat-icon>
+          <p *ngIf="toggle">
+            &nbsp;My Day
+          </p>
+        </a></div>
+      <div class="btndiv"><a class="btn" (click)="navigate('important')">
+          <mat-icon class="material-icons">star_border </mat-icon>
+          <p *ngIf="toggle">
+            &nbsp;Important
+          </p>
+        </a></div>
+      <div class="btndiv"><a class="btn" (click)="navigate('tasks')">
+          <mat-icon class="material-icons">home</mat-icon>
+          <p *ngIf="toggle">
+            &nbsp;My Tasks
+          </p>
+        </a></div>
+
+    </div>
+  </div>
+  <div class="col md-12 xl-12">
+    <div class="main">
+      <div *ngIf="myDay">
+        <div class="heading">
+          <p class="Md">My Day
+            <button class="btn " matTooltip="List options" matTooltipPosition="above">
+              <mat-icon>more_horiz</mat-icon>
+            </button></p>
+        </div>
+        <p class="d">{{day}},{{month}} {{date}}</p>
+      </div>
+      <div *ngIf="tasks">
+      </div>
+      <div *ngIf="important">
+
+      </div>
+    </div>
+    <form class="addtsk" id="addtsk">
+      <div class="addtskinput"><button class="btn" id="plusbtn">
+          <mat-icon class="material-icons" >add</mat-icon>
+        </button><input type="text" placeholder="Add a Task" (click)="inputclick()">
+        <button class="btn" id="addbtn">Add</button>
+      </div>
+    </form>
+    <div class="lines">
+
+    </div>
+  </div>
+</div>
