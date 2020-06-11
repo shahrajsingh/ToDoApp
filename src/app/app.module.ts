@@ -39,7 +39,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+
 
 
 @NgModule({
@@ -47,8 +47,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     AppComponent,
     HeaderComponent,
     TaskListComponent,
-    TaskCreateComponent,
-    SidenavComponent,
+    TaskCreateComponent
+
 
   ],
   imports: [
