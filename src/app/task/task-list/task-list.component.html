@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div class="row" style="width: 100%; height: 100%; position: fixed;">
+<!--
+<div class="row" style="width: 100%; height: 100%;position: fixed;">
   <div class="col1">
     <div class="menubtn btn">
       <mat-icon class="material-icons" (click)="togglefunc()">menu</mat-icon>
@@ -26,32 +27,122 @@
 
     </div>
   </div>
-  <div class="col md-12 xl-12">
+  <div class="col md-12 xl-12 xs-12" style="overflow-y: scroll; overflow-x: scroll;">
     <div class="main">
       <div *ngIf="myDay">
         <div class="heading">
           <p class="Md">My Day
-            <button class="btn " matTooltip="List options" matTooltipPosition="above">
+            <button class="btn " matTooltip="List options" matTooltipPosition="below">
               <mat-icon>more_horiz</mat-icon>
             </button></p>
         </div>
-        <p class="d">{{day}},{{month}} {{date}}</p>
+        <p class="d">{{day}}, {{month}} {{date}}</p>
       </div>
       <div *ngIf="tasks">
+        <p class="tskpgrph">
+          Tasks<button class="btn " matTooltip="List options" matTooltipPosition="below">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+        </p>
       </div>
       <div *ngIf="important">
+        <p class="imptsk">Important</p>
+      </div>
+    </div>
+    <div>
+      <form class="addtsk" id="addtsk" (submit)="addtskfunc(addtsk)" #addtsk="ngForm">
+        <div class="addtskinput"><button class="btn" id="plusbtn" type="submit">
+            <mat-icon class="material-icons">add</mat-icon>
+          </button><input type="text" placeholder="Add a Task" required name="tsk" ngModel #tsk="ngModel" maxlength="255">
+          <button class="btn" id="addbtn" type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="completedtsk" *ngIf="completed.length > 0">
+      <a class="btn completeheader" (click)="listcomplete()">
+        <i class="material-icons" >{{arrow}}</i>
+        <span class="completep">Completed</span>
+      </a>
+      <div class="completedtasks" *ngFor="let ctsk of completed">
+        {{ctsk.task_name}}
+      </div>
+    </div>
+    <div class="tsklist" *ngIf="tasklist.length > 0">
+      <div class="tsklistdiv" *ngFor="let t of tasklist">
+        <mat-checkbox color="primary" (click)="complete(t)"></mat-checkbox><span
+          class="taskp">{{t.task_name}}</span>
+      </div>
+    </div>
+    <div class="lines">
+
+    </div>
+  </div>
+</div>-->
+<div class="container-fluid">
+  <div class="row r1">
+    <div class="c1 " id="sidenav">
+      <div class="menubtn btn ">
+        <mat-icon class="material-icons" (click)="togglefunc()">menu</mat-icon>
+      </div>
+      <div class="sidenavbtns ">
+        <div class="myday col" (click)="navigate('myDay')">
+          <a class="material-icons"></a>
+          My Day
+        </div>
+        <div class="important col" (click)="navigate('important')">
+          <a class="material-icons">star_border</a>
+          Important
+        </div>
+        <div class="mytask col" (click)="navigate('tasks')">
+          <a class="material-icons">home</a>
+          Tasks
+        </div>
 
       </div>
     </div>
-    <form class="addtsk" id="addtsk">
-      <div class="addtskinput"><button class="btn" id="plusbtn">
-          <mat-icon class="material-icons" >add</mat-icon>
-        </button><input type="text" placeholder="Add a Task" (click)="inputclick()">
-        <button class="btn" id="addbtn">Add</button>
+    <div class="c2" id="col2">
+      <div class="navselected col">
+        <div *ngIf="myDay">
+          <div class="heading">
+            <p class="Md">My Day
+              <button class="btn " matTooltip="List options" matTooltipPosition="below">
+                <mat-icon>more_horiz</mat-icon>
+              </button></p>
+          </div>
+          <p class="d">{{day}}, {{month}} {{date}}</p>
+        </div>
+        <div *ngIf="tasks">
+          <p class="tskpgrph">
+            Tasks<button class="btn " matTooltip="List options" matTooltipPosition="below">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+          </p>
+        </div>
+        <div *ngIf="important">
+          <p class="imptsk">Important</p>
+        </div>
       </div>
-    </form>
-    <div class="lines">
+      <div class="tskinput">
+        <app-task-create></app-task-create>
+      </div>
+      <div class="completed" *ngIf="tasklist.length > 0">
+        <div class="completedheader" (click)="listcomplete()">
+          <a class="btn material-icons" id="icon">keyboard_arrow_right</a>
+          <a class="btn a">Completed</a>
+        </div>
+        <div class="list" *ngIf="arrowtoggle">
+          <div class="completedtask" *ngFor="let task of tasklist">
+            <a class="btn material-icons ctb"></a>
+            <a class="btn cta">{{task.task_name}}</a>
+            <a class="btn ctb1 material-icons"></a>
+          </div>
+        </div>
 
+      </div>
+      <div class="lines">
+
+      </div>
     </div>
   </div>
 </div>

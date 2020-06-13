@@ -1,0 +1,15 @@
+.container-fluid{
+  height: 100%;
+
+}
+.row.r1{
+
+
+}
+.row.r2{
+  overflow-y: scroll;
+}
+.col{
+  padding: 0px;
+}
+

@@ -3,13 +3,16 @@
   padding-left: 3%;
   height: 3rem;
   padding-right: 3%;
-  background-color: rgb(0,120,215);
+  background-color: #0078d7;
 }
 .Header p {
   font-family: 'Segoe UI Semibold';
   margin: 0px;
 }
-
+.authbtn{
+  background-color: rgb(66,66,66);
+  color: white;
+}
 form.Search:hover {
   background: rgb(255, 255, 255);
 }
