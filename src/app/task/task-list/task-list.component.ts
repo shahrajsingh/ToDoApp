@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Task } from '../task.model';
 import { Subscription } from "rxjs";
 import { TaskService } from '../task.service';
-
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -18,6 +18,7 @@ export class TaskListComponent implements OnInit {
   month:String ="";
   date:String ="";
   tasksub = new Subscription();
+  completedsub = new Subscription();
   myDay: Boolean;
   tasks: Boolean;
   important: Boolean;
@@ -27,7 +28,7 @@ export class TaskListComponent implements OnInit {
   completed: Task[] = [];
   arrow: String = "keyboard_arrow_right";
   arrowtoggle: Boolean = false;
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, public dialog: MatDialog) {
     this.d = new Date();
     this.day += this.days[this.d.getDay()];
     this.month += this.months[this.d.getMonth()];
@@ -40,10 +41,14 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.gettask();
+    //alert("the website is currently in development phase,designed for desktop screens of aspect ratio 16:9 and 1920X1080 resolution");
     this.tasksub = this.taskService.taskaddedListener().subscribe(res => {
       this.tasklist = res.tasklist;
     });
+    this.completedsub = this.taskService.taskcompletedListener().subscribe( res =>{
+      this.completed = res.completedlist;
+    });
+    this.taskService.gettask();
 
   }
 
@@ -86,11 +91,8 @@ export class TaskListComponent implements OnInit {
 
 
   complete(ctask: Task) {
-    ctask.status = true;
-    this.completed.push(ctask);
-    console.log(this.completed);
-    this.tasklist.splice(ctask.index, 1);
-    console.log(this.tasklist);
+    this.taskService.completeTask(ctask._id);
+
   }
   listcomplete() {
 
@@ -102,5 +104,9 @@ export class TaskListComponent implements OnInit {
     } else {
       document.getElementById("icon").style.transform = "rotate(0deg)";
     }
+  }
+  markimportant(task: Task){
+    this.tasklist[task.index].important = true;
+    this.taskService.markImportant(task._id);
   }
 }
