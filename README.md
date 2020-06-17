@@ -25,3 +25,15 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Link
+http://todowebapplication.s3-website.ap-south-1.amazonaws.com/
+
+## Steps to run on local system
+  1.open package.json file in backend folder
+  2.for all the dependencies run: npm install --save <dependency name>
+    e.g:- npm install --save bcryptjs
+  3.repeat the process 2 for all the dependencies mentioned in package.json file
+  4.type ng serve -o in terminal
+  5.type npm run start:server in new terminal
+You should be good to go
