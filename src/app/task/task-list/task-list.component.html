@@ -46,34 +46,34 @@
       <div class="tskinput">
         <app-task-create></app-task-create>
       </div>
-      <div class="completed" *ngIf="completed.length > 0">
+      <div class="pendingtask" *ngFor="let task of tasklist">
+        <div class="pendingtask_item" *ngIf="!task.status">
+          <a class="btn material-icons ctb" (click)="complete(task)"></a>
+          <a class="btn cta">{{task.task_name}}</a>
+          <a class="btn ctb1 material-icons" (click)="markimportant(task)" *ngIf="!task.important"></a>
+          <a class="btn ctb2 material-icons" (click)="markimportant(task)" *ngIf="task.important"></a>
+        </div>
+      </div>
+      <div class="completed" *ngIf="completedlen">
         <div class="completedheader" (click)="listcomplete()">
           <a class="btn material-icons" id="icon">keyboard_arrow_right</a>
           <a class="btn a">Completed</a>
         </div>
         <div class="list" *ngIf="arrowtoggle">
-          <div class="completedtask" *ngFor="let task of completed">
-            <div *ngIf="task.status">
+          <div class="completedtask " *ngFor="let task of tasklist">
+            <div class="completedtask_item " *ngIf="task.status">
               <a class="btn material-icons ctb"></a>
               <a class="btn cta"><s>{{task.task_name}}</s></a>
               <a class="btn ctb1 material-icons" (click)="markimportant(task)" *ngIf="!task.important"></a>
               <a class="btn ctb2 material-icons" (click)="markimportant(task)" *ngIf="task.important"></a>
             </div>
-
           </div>
         </div>
 
       </div>
 
-        <div class="pendingtask" *ngFor="let task of tasklist">
-          <div *ngIf="!task.status">
-            <a class="btn material-icons ctb" (click)="complete(task)"></a>
-            <a class="btn cta">{{task.task_name}}</a>
-            <a class="btn ctb1 material-icons" (click)="markimportant(task)" *ngIf="!task.important"></a>
-            <a class="btn ctb2 material-icons" (click)="markimportant(task)" *ngIf="task.important"></a>
-          </div>
-        </div>
-        
+
+
 
       <div class="lines">
 

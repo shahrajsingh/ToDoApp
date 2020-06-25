@@ -8,6 +8,7 @@
 .Header p {
   font-family: 'Segoe UI Semibold';
   margin: 0px;
+  color: white;
 }
 .authbtn{
   background-color: rgb(66,66,66);

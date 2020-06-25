@@ -10,7 +10,7 @@ const BACKEND_URL = environment.apiUrl + "/tasks/";
 export class TaskService {
   private tasks: Task[] = [];
   private completedtask: Task[] = [];
-  private taskcompleted = new Subject < { completedlist: Task[] } >();
+  private taskcompleted = new Subject<{ completedlist: Task[] }>();
   private taskadded = new Subject<{ tasklist: Task[] }>();
   constructor(private http: HttpClient) { }
 
@@ -26,41 +26,50 @@ export class TaskService {
   }
 
   gettask() {
-    this.http.get<{ message: String; result: Task[] }>(BACKEND_URL).subscribe((res: any) => {
-      console.log(res.message);
+    let completedlen = false;
+    this.http.get<{ message: String; result: Task[]; Ctaskcount: Number; }>(BACKEND_URL).subscribe((res: any) => {
+
       this.tasks = res.result;
       console.log(this.tasks.length);
       this.taskadded.next({ tasklist: [...this.tasks] });
     });
 
+
+
+    /*
     this.http.get<{ message: String; result: Task[]}>(BACKEND_URL+"/ctask").subscribe((res:any) =>{
       console.log(res.message);
       this.completedtask = res.result;
       this.taskcompleted.next({
         completedlist: [...this.completedtask]
       });
-    });
+    });*/
+
 
   }
 
-  completeTask(id: String){
+  completeTask(id: String) {
     const body = {
       id: id
     }
-    this.http.put<{message:String}>(BACKEND_URL,body).subscribe( (res:any) =>{
+    this.http.put<{ message: String }>(BACKEND_URL, body).subscribe((res: any) => {
       console.log(res.message);
     });
-    this.gettask();
+
   }
-  markImportant(id: String){
+  markImportant(id: String, imp: Boolean) {
     const body = {
       id: id
     }
-    this.http.put<{message: String}>(BACKEND_URL+"/imp",body).subscribe( (result)=>{
-      console.log(result.message);
-    });
-
-    this.gettask();
+    if (imp) {
+      this.http.put<{ message: String }>(BACKEND_URL+ "/nimp", body).subscribe( result =>{
+        console.log(result.message);
+      });
+    } else {
+      this.http.put<{ message: String }>(BACKEND_URL + "/imp", body).subscribe((result) => {
+        console.log(result.message);
+      });
+    }
   }
 
   taskaddedListener() {

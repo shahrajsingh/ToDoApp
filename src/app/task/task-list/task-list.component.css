@@ -169,7 +169,7 @@
 .completed {
 
   margin: 12px 24px 0px 24px;
-  border-bottom: 1px solid #e5e5e5;
+  
 }
 .completed .completedheader {
   width: 100%;
@@ -185,7 +185,7 @@
   color: black;
   font-weight: 600;
 }
-.completedtask {
+.completedtask_item {
   border-bottom: 1px solid #e5e5e5;
 
   padding-top: 7px;
@@ -198,8 +198,14 @@
 .completedtask .ctb1 {
   float: right;
 }
+.completedtask .ctb2 {
+  float: right;
+}
 .completedtask .ctb1.material-icons::before {
   content: "star_border";
+}
+.completedtask .ctb2.material-icons::before {
+  content: "star";
 }
 .completedtask .ctb1:hover.material-icons::before {
   font-weight: 600;
@@ -220,7 +226,7 @@
   margin: 0px 24px 0px 24px;
 }
 
-.pendingtask {
+.pendingtask_item {
   border-bottom: 1px solid #e5e5e5;
   padding-top: 7px;
   padding-bottom: 7px;

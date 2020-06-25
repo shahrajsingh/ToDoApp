@@ -11,4 +11,7 @@ router.get("/ctask",TaskController.getCompletedTask);
 router.put("", TaskController.completeTask);
 
 router.put("/imp",TaskController.markImportant);
+
+router.put("/nimp",TaskController.marknImportant);
+
 module.exports = router;

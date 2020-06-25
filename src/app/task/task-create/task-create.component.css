@@ -10,6 +10,8 @@
 }
 .input .b1 {
   padding-left: 0px;
+  width: 24px;
+  margin-right: 4px;
 }
 .input input {
   width: 80%;
@@ -26,6 +28,7 @@
   content: "radio_button_unchecked";
   font-size: 20px;
 }
+
 @media screen and (min-width: 300px) {
 
   .input input{

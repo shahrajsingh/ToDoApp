@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Task } from '../task.model';
 import { Subscription } from "rxjs";
 import { TaskService } from '../task.service';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -14,9 +14,9 @@ export class TaskListComponent implements OnInit {
   d
   days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  day:String ="";
-  month:String ="";
-  date:String ="";
+  day: String = "";
+  month: String = "";
+  date: String = "";
   tasksub = new Subscription();
   completedsub = new Subscription();
   myDay: Boolean;
@@ -25,9 +25,10 @@ export class TaskListComponent implements OnInit {
   toggle: Boolean;
   inputtoggle: Boolean;
   tasklist: Task[] = [];
-  completed: Task[] = [];
+  completedlen: Boolean;
   arrow: String = "keyboard_arrow_right";
   arrowtoggle: Boolean = false;
+  audio;
   constructor(private taskService: TaskService, public dialog: MatDialog) {
     this.d = new Date();
     this.day += this.days[this.d.getDay()];
@@ -38,16 +39,32 @@ export class TaskListComponent implements OnInit {
     this.important = false;
     this.toggle = false;
     this.inputtoggle = false;
+    this.completedlen = false;
+    this.audio = new Audio();
+    this.audio.src = "../Completed.wav";
+    this.audio.load();
+
   }
 
   ngOnInit(): void {
     //alert("the website is currently in development phase,designed for desktop screens of aspect ratio 16:9 and 1920X1080 resolution");
     this.tasksub = this.taskService.taskaddedListener().subscribe(res => {
       this.tasklist = res.tasklist;
+      const len = this.tasklist.length;
+      for (let a = 0; a < len; a++) {
+        if (this.tasklist[a].status == true) {
+          this.completedlen = true;
+          break;
+        }
+      }
+
     });
-    this.completedsub = this.taskService.taskcompletedListener().subscribe( res =>{
+
+    /*this.completedsub = this.taskService.taskcompletedListener().subscribe(res => {
       this.completed = res.completedlist;
-    });
+      console.log(this.completed);
+    });*/
+
     this.taskService.gettask();
 
   }
@@ -60,7 +77,7 @@ export class TaskListComponent implements OnInit {
       document.getElementById("sidenav").style.transition = "0.5s";
       document.getElementById("col2").style.transition = "0.5s";
       document.getElementById("col2").style.paddingLeft = "200px";
-      if(window.matchMedia("(max-width: 400px)")){
+      if (window.matchMedia("(max-width: 400px)")) {
         //document.getElementById("col2").style.display = "none";
         console.log(true);
       }
@@ -68,7 +85,7 @@ export class TaskListComponent implements OnInit {
     } else {
       document.getElementById("sidenav").style.width = "50px";
       document.getElementById("col2").style.paddingLeft = "50px";
-      if(window.matchMedia("(min-width: 0px) and (max-width: 400px)")){
+      if (window.matchMedia("(min-width: 0px) and (max-width: 400px)")) {
         document.getElementById("col2").style.display = "initial";
       }
     }
@@ -91,9 +108,13 @@ export class TaskListComponent implements OnInit {
 
 
   complete(ctask: Task) {
+    
+    this.audio.play();
     this.taskService.completeTask(ctask._id);
-
+    this.tasklist[ctask.index].status = true;
   }
+
+  
   listcomplete() {
 
     this.arrowtoggle = !this.arrowtoggle;
@@ -105,8 +126,16 @@ export class TaskListComponent implements OnInit {
       document.getElementById("icon").style.transform = "rotate(0deg)";
     }
   }
-  markimportant(task: Task){
-    this.tasklist[task.index].important = true;
-    this.taskService.markImportant(task._id);
+
+
+  markimportant(task: Task) {
+    if (task.important) {
+      this.tasklist[task.index].important = false;
+      this.taskService.markImportant(task._id,task.important);
+    } else {
+      this.tasklist[task.index].important = true;
+      this.taskService.markImportant(task._id,task.important);
+    }
+
   }
 }

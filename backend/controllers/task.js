@@ -43,37 +43,52 @@ exports.getTasks = (req, res, next) => {
   });
 }
 
-exports.getCompletedTask = (req,res,next) =>{
-  Task.find({status: true}).then( result =>{
+exports.getCompletedTask = (req, res, next) => {
+  Task.find({ status: true }).then(result => {
     res.status(201).json({
       message: "completed tasks found",
       result: result
     });
-  }).catch(error =>{
+  }).catch(error => {
     res.status(500).json({
       message: "an error has occured",
       result: error
     });
   });
 }
-exports.completeTask = (req,res,next) =>{
-  Task.findByIdAndUpdate(req.body.id, {status: true}).then( result =>{
+
+
+exports.completeTask = (req, res, next) => {
+  Task.findByIdAndUpdate(req.body.id, { status: true }).then(result => {
     res.status(201).json({
       message: "task completed"
     });
-  }).catch( result =>{
+  }).catch(result => {
     res.status(500).json({
       message: "internal server error"
     });
   });
 }
 
-exports.markImportant = (req,res,next)=>{
-  Task.findByIdAndUpdate(req.body.id, {important: true}).then( result=>{
+exports.marknImportant = (req, res, next) => {
+  Task.findByIdAndUpdate(req.body.id, { important: false }).then(result => {
+    res.status(201).json({
+      message: "marked Not important"
+    });
+  }).catch(result => {
+    res.status(500).json({
+      message: 'server error'
+    });
+  });
+}
+
+
+exports.markImportant = (req, res, next) => {
+  Task.findByIdAndUpdate(req.body.id, { important: true }).then(result => {
     res.status(201).json({
       message: "marked important"
     });
-  }).catch( result =>{
+  }).catch(result => {
     res.status(500).json({
       message: 'server error'
     });
