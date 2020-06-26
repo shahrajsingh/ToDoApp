@@ -26,8 +26,8 @@ export class TaskService {
   }
 
   gettask() {
-    let completedlen = false;
-    this.http.get<{ message: String; result: Task[]; Ctaskcount: Number; }>(BACKEND_URL).subscribe((res: any) => {
+
+    this.http.get<{ message: String; result: Task[]}>(BACKEND_URL).subscribe((res: any) => {
 
       this.tasks = res.result;
       console.log(this.tasks.length);
@@ -48,6 +48,24 @@ export class TaskService {
 
   }
 
+  getimptask() {
+    this.http.get<{ message: String; result: Task[];}>(BACKEND_URL+"/imptask").subscribe((res: any) => {
+
+      this.tasks = res.result;
+      console.log(this.tasks.length);
+      this.taskadded.next({ tasklist: [...this.tasks] });
+    });
+  }
+
+  getmyDaytask() {
+    this.http.get<{ message: String; result: Task[];}>(BACKEND_URL+"/mydaytask").subscribe((res: any) => {
+
+      this.tasks = res.result;
+      console.log(this.tasks.length);
+      this.taskadded.next({ tasklist: [...this.tasks] });
+    });
+  }
+
   completeTask(id: String) {
     const body = {
       id: id
@@ -58,14 +76,17 @@ export class TaskService {
 
   }
   markImportant(id: String, imp: Boolean) {
+
     const body = {
       id: id
     }
     if (imp) {
-      this.http.put<{ message: String }>(BACKEND_URL+ "/nimp", body).subscribe( result =>{
+      console.log("in imp");
+      this.http.put<{ message: String }>(BACKEND_URL + "/nimp", body).subscribe(result => {
         console.log(result.message);
       });
     } else {
+      console.log("in nimp");
       this.http.put<{ message: String }>(BACKEND_URL + "/imp", body).subscribe((result) => {
         console.log(result.message);
       });

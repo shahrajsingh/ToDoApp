@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 
 const taskSchema = mongoose.Schema({
-  status:  {
+  status: {
     type: Boolean, required: true
   },
   task_name: {
     type: String, required: true
   },
-  important:  {
+  important: {
     type: Boolean, required: true
   },
   timeStamp: {
+    type: String, required: true
+  },
+  date: {
     type: String, required: true
   },
   index: {

@@ -4,5 +4,6 @@ export class Task{
   task_name: String;
   important: Boolean;
   timeStamp: String;
+  date: String;
   index: number;
 }

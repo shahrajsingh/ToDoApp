@@ -1,11 +1,13 @@
 const Task = require("../models/task");
 
 exports.createTask = (req, res, next) => {
+  console.log(req.body);
   const task = new Task({
     status: req.body.status,
     task_name: req.body.task_name,
     important: req.body.important,
     timeStamp: req.body.timeStamp,
+    date: req.body.date,
     index: req.body.index
   });
   task.save().then(result => {
@@ -42,6 +44,56 @@ exports.getTasks = (req, res, next) => {
     });
   });
 }
+
+
+exports.getimptask = (req, res, next) => {
+  Task.find({ important: true }).then((result) => {
+    if (result) {
+      res.status(201).json({
+        message: "tasks found",
+        result: result
+      });
+    } else {
+      res.status(404).json({
+        message: "no taskas added or found",
+        result: result
+      });
+    }
+  }).catch(result => {
+    res.status(500).json({
+      message: "error getting tasks",
+      result: result
+    });
+  });
+}
+
+
+exports.getmydaytasks = (req, res, next) => {
+  const d = new Date();
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+  console.log(date);
+  Task.find({ date: date }).then((result) => {
+    if (result) {
+      res.status(201).json({
+        message: "tasks found",
+        result: result
+      });
+    } else {
+      res.status(404).json({
+        message: "no taskas added or found",
+        result: result
+      });
+    }
+  }).catch(result => {
+    res.status(500).json({
+      message: "error getting tasks",
+      result: result
+    });
+  });
+}
+
 
 exports.getCompletedTask = (req, res, next) => {
   Task.find({ status: true }).then(result => {

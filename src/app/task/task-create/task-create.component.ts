@@ -13,15 +13,15 @@ export class TaskCreateComponent implements OnInit {
   d
   days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  day:String ="";
-  month:String ="";
-  date:String ="";
-  constructor(private taskService:TaskService) {
+  day: String = "";
+  month: String = "";
+  date: String = "";
+  constructor(private taskService: TaskService) {
     this.d = new Date();
     this.day += this.days[this.d.getDay()];
     this.month += this.months[this.d.getMonth()];
     this.date += this.d.getDate();
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -34,9 +34,11 @@ export class TaskCreateComponent implements OnInit {
         status: false,
         task_name: form.value.taskinput,
         important: false,
-        timeStamp: this.day+", "+this.date+" "+this.month+" "+this.d.getFullYear()+" "+this.d.getHours()+":"+this.d.getMinutes()+":"+this.d.getSeconds(),
+        timeStamp: this.d.getHours() + ":" + this.d.getMinutes() + ":" + this.d.getSeconds(),
+        date: this.day + ", " + this.date + " " + this.month + " " + this.d.getFullYear(),
         index: null
       };
+      console.log(tsk);
       this.taskService.addtask(tsk);
     }
     form.reset();

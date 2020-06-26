@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TaskListComponent implements OnInit {
 
+  isLoading: Boolean;
   d
   days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -34,8 +35,8 @@ export class TaskListComponent implements OnInit {
     this.day += this.days[this.d.getDay()];
     this.month += this.months[this.d.getMonth()];
     this.date += this.d.getDate();
-    this.tasks = false;
-    this.myDay = true;
+    this.tasks = true;
+    this.myDay = false;
     this.important = false;
     this.toggle = false;
     this.inputtoggle = false;
@@ -47,6 +48,7 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.taskService.gettask();
     //alert("the website is currently in development phase,designed for desktop screens of aspect ratio 16:9 and 1920X1080 resolution");
     this.tasksub = this.taskService.taskaddedListener().subscribe(res => {
       this.tasklist = res.tasklist;
@@ -64,8 +66,8 @@ export class TaskListComponent implements OnInit {
       this.completed = res.completedlist;
       console.log(this.completed);
     });*/
-
-    this.taskService.gettask();
+    
+    
 
   }
 
@@ -92,14 +94,17 @@ export class TaskListComponent implements OnInit {
   }
   navigate(x: String) {
     if (x === 'myDay') {
+      this.taskService.getmyDaytask();
       this.myDay = true;
       this.important = false;
       this.tasks = false;
     } else if (x === 'important') {
+      this.taskService.getimptask();
       this.myDay = false;
       this.important = true;
       this.tasks = false;
     } else {
+      this.taskService.gettask();
       this.myDay = false;
       this.important = false;
       this.tasks = true;
@@ -108,13 +113,13 @@ export class TaskListComponent implements OnInit {
 
 
   complete(ctask: Task) {
-    
+    this.completedlen = true;
     this.audio.play();
     this.taskService.completeTask(ctask._id);
     this.tasklist[ctask.index].status = true;
   }
 
-  
+
   listcomplete() {
 
     this.arrowtoggle = !this.arrowtoggle;
@@ -130,11 +135,12 @@ export class TaskListComponent implements OnInit {
 
   markimportant(task: Task) {
     if (task.important) {
+      this.taskService.markImportant(task._id, task.important);
       this.tasklist[task.index].important = false;
-      this.taskService.markImportant(task._id,task.important);
     } else {
+
+      this.taskService.markImportant(task._id, task.important);
       this.tasklist[task.index].important = true;
-      this.taskService.markImportant(task._id,task.important);
     }
 
   }
