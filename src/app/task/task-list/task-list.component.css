@@ -1,4 +1,7 @@
-
+.spinner{
+  margin: auto;
+  
+}
 .container-fluid {
   height: 100%;
   padding: 0px;
@@ -21,9 +24,7 @@
   height: 100%;
   padding-left: 50px;
 }
-.c2 .completed {
 
-}
 .menubtn {
   margin-top: 16px;
   margin-bottom: 8px;

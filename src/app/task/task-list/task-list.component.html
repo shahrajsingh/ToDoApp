@@ -21,8 +21,9 @@
 
       </div>
     </div>
-    <div class="c2" id="col2">
-      <div class="navselected col">
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <div class="c2" id="col2" *ngIf="!isLoading">
+      <div class="navselected col" >
         <div *ngIf="myDay">
           <div class="heading">
             <p class="Md">My Day
@@ -54,11 +55,14 @@
           <a class="btn ctb2 material-icons" (click)="markimportant(task)" *ngIf="task.important"></a>
         </div>
       </div>
-      <div class="completed" *ngIf="completedlen">
-        <div class="completedheader" (click)="listcomplete()">
-          <a class="btn material-icons" id="icon">keyboard_arrow_right</a>
-          <a class="btn a">Completed</a>
-        </div>
+      <div *ngIf="tasklist.length > 0">
+        <div class="completed" *ngIf="completedlen">
+          <div class="completedheader" (click)="listcomplete()">
+            <a class="btn material-icons" id="icon">keyboard_arrow_right</a>
+            <a class="btn a">Completed</a>
+          </div>
+      </div>
+      
         <div class="list" *ngIf="arrowtoggle">
           <div class="completedtask " *ngFor="let task of tasklist">
             <div class="completedtask_item " *ngIf="task.status">

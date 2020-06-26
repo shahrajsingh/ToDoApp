@@ -48,6 +48,7 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.taskService.gettask();
     //alert("the website is currently in development phase,designed for desktop screens of aspect ratio 16:9 and 1920X1080 resolution");
     this.tasksub = this.taskService.taskaddedListener().subscribe(res => {
@@ -59,7 +60,7 @@ export class TaskListComponent implements OnInit {
           break;
         }
       }
-
+      this.isLoading = false;
     });
 
     /*this.completedsub = this.taskService.taskcompletedListener().subscribe(res => {

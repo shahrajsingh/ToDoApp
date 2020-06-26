@@ -40,6 +40,9 @@ import { HeaderComponent } from './header/header.component';
 
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+
 
 
 
@@ -48,7 +51,10 @@ import { TaskCreateComponent } from './task/task-create/task-create.component';
     AppComponent,
     HeaderComponent,
     TaskListComponent,
-    TaskCreateComponent
+    TaskCreateComponent,
+    LoginComponent,
+    SignupComponent,
+    
 
 
   ],
