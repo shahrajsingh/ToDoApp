@@ -4,7 +4,7 @@ const TaskController = require("../controllers/task");
 
 router.post("",TaskController.createTask);
 
-router.get("",TaskController.getTasks);
+router.get("/:UserId",TaskController.getTasks);
 
 router.get("/imptask",TaskController.getimptask);
 

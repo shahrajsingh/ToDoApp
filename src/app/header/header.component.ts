@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
   isAuth = true;
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -17,5 +18,8 @@ export class HeaderComponent implements OnInit {
       return;
     }
     alert(form.value.search);
+  }
+  logout(){
+    this.authService.logout();
   }
 }

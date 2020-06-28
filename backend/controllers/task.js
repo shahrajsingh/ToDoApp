@@ -8,7 +8,8 @@ exports.createTask = (req, res, next) => {
     important: req.body.important,
     timeStamp: req.body.timeStamp,
     date: req.body.date,
-    index: req.body.index
+    index: req.body.index,
+    UserId: req.body.userId
   });
   task.save().then(result => {
     res.status(201).json({
@@ -25,7 +26,8 @@ exports.createTask = (req, res, next) => {
 }
 
 exports.getTasks = (req, res, next) => {
-  Task.find().then((result) => {
+  console.log(req.params.UserId);
+  Task.find({UserId: req.params.UserId}).then((result) => {
     if (result) {
       res.status(201).json({
         message: "tasks found",

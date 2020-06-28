@@ -18,6 +18,9 @@ const taskSchema = mongoose.Schema({
   },
   index: {
     type: Number, required: true
+  },
+  UserId: {
+    type: String, required: true
   }
 });
 

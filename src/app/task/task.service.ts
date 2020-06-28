@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Task } from './task.model';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth.service';
 const BACKEND_URL = environment.apiUrl + "/tasks/";
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class TaskService {
   private completedtask: Task[] = [];
   private taskcompleted = new Subject<{ completedlist: Task[] }>();
   private taskadded = new Subject<{ tasklist: Task[] }>();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   addtask(task) {
     task.index = this.tasks.length;
@@ -26,9 +27,8 @@ export class TaskService {
   }
 
   gettask() {
-
-    this.http.get<{ message: String; result: Task[]}>(BACKEND_URL).subscribe((res: any) => {
-
+    const UserId = this.authService.getUserId();
+    this.http.get<{ message: String; result: Task[]}>(BACKEND_URL+UserId).subscribe((res: any) => {
       this.tasks = res.result;
       console.log(this.tasks.length);
       this.taskadded.next({ tasklist: [...this.tasks] });

@@ -7,6 +7,6 @@
     <button type="submit" class="material-icons btn">search</button>
     <input type="text" name="search" ngModel #search="ngModel" required>
   </form>
-  <button mat-raised-button class="authbtn" *ngIf="isAuth">Logout</button>
+  <button mat-raised-button class="authbtn" *ngIf="isAuth" (click)="logout()">Logout</button>
 
 </mat-toolbar>

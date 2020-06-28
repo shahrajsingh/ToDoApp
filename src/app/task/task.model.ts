@@ -6,4 +6,5 @@ export class Task{
   timeStamp: String;
   date: String;
   index: number;
+  UserId: String;
 }
